@@ -1,0 +1,78 @@
+<job id="ConfigureWDS">
+<script language="VBScript" src="..\..\scripts\ZTIUtility.vbs"/>
+<script language="VBScript"> 
+
+'//----------------------------------------------------------------------------
+'// Solution: Hydration
+'// Purpose: Used to configure WDS
+'// Usage: cscript ConfigureWDS.wsf [/debug:true]
+'// Version: 1.4 - August 8, 2015 - Johan Arwidmark
+'//
+'// This script is provided "AS IS" with no warranties, confers no rights and 
+'// is not supported by the authors or Deployment Artist. 
+'//
+'//----------------------------------------------------------------------------
+
+'//----------------------------------------------------------------------------
+'// Global constant and variable declarations
+'//---------------------------------------------------------------------------- 
+
+Option Explicit 
+
+Dim iRetVal 
+
+'//----------------------------------------------------------------------------
+'// End declarations
+'//---------------------------------------------------------------------------- 
+
+'//----------------------------------------------------------------------------
+'// Main routine
+'//---------------------------------------------------------------------------- 
+
+On Error Resume Next
+iRetVal = ZTIProcess
+ProcessResults iRetVal
+On Error Goto 0 
+
+'//---------------------------------------------------------------------------
+'//
+'// Function: ZTIProcess()
+'//
+'// Input: None
+'// 
+'// Return: Success - 0
+'// Failure - non-zero
+'//
+'// Purpose: Perform main ZTI processing
+'// 
+'//---------------------------------------------------------------------------
+Function ZTIProcess() 
+
+	iRetVal = Success 
+	ZTIProcess = iRetval 
+	Err.clear
+	
+	' Initialize the WDS server
+	iRetVal = oUtility.RunWithHeartbeat("cmd.exe /c wdsutil /initialize-server /server:" & oEnvironment.item("OSDComputerName") & " /reminst:E:\RemoteInstall")
+	If iRetVal <> 0 then
+		oLogging.CreateEntry "Configure WDS: Error - Failed to initialize WDS server:  " & Err.Description & " (" & Err.Number & ")", LogTypeError
+		ZTIProcess = Failure
+	End if
+	oLogging.CreateEntry "Configure WDS: WDS initailized", LogTypeInfo
+	
+	oLogging.CreateEntry "Configure WDS: Begining configuration of WDS server", LogTypeInfo
+	
+	iRetVal = oUtility.RunWithHeartbeat("cmd.exe /c WDSUTIL /Set-Server /AnswerClients:All")
+	oLogging.CreateEntry "INSTALL WDS: Configuring WDS to respond to all clients", LogTypeInfo
+	If iRetVal <> 0 then
+		oLogging.CreateEntry "Configure WDS: ERROR - Failed to Configure WDS to respond to all clients:  " & Err.Description & " (" & Err.Number & ")", LogTypeError
+		ZTIProcess = Failure
+	End if
+	
+	oLogging.CreateEntry "Configure WDS: Completed installation and configuration of WDS server", LogTypeInfo
+	ZTIProcess = Success
+	
+End Function 
+
+</script>
+</job>

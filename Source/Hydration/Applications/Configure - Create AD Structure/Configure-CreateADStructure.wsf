@@ -1,0 +1,239 @@
+<job id="Configure-CreateADStructure">
+<script language="VBScript" src="..\..\scripts\ZTIUtility.vbs"/>
+<script language="VBScript"> 
+
+'//----------------------------------------------------------------------------
+'// Solution: Hydration
+'// Purpose: Used to create AD Structure
+'// Usage: Configure-CreateADStructure.wsf [/debug:true]
+'// Version: 1.1 - August 8, 2012 - Johan Arwidmark
+'// Version: 1.2 - September 8, 2012 - Mikael Nystrom
+'// 
+'// This script is provided "AS IS" with no warranties, confers no rights and 
+'// is not supported by the authors or Deployment Artist. 
+'//
+'//----------------------------------------------------------------------------
+
+
+'//----------------------------------------------------------------------------
+'// Global constant and variable declarations
+'//---------------------------------------------------------------------------- 
+
+Dim iRetVal 
+
+'//----------------------------------------------------------------------------
+'// Main routine
+'//---------------------------------------------------------------------------- 
+
+'On Error Resume Next
+iRetVal = ZTIProcess
+ProcessResults iRetVal
+On Error Goto 0 
+
+Function ZTIProcess() 
+
+	iRetVal = Success 
+	ZTIProcess = iRetval 
+	
+	oLogging.CreateEntry "Creating Hydration OUs", LogTypeInfo	
+	
+	Set oRootDSE = GetObject("LDAP://rootDSE")
+	sADsPath = "LDAP://" & oRootDSE.Get("defaultNamingContext")
+	Set oDomain = GetObject(sADsPath)
+
+	Set oOU = oDomain.Create("organizationalUnit", "ou=ViaMonstra")
+	oOU.SetInfo
+
+	Set oOU = oDomain.Create("organizationalUnit", "ou=Servers,ou=ViaMonstra")
+	oOU.SetInfo
+
+	Set oOU = oDomain.Create("organizationalUnit", "ou=Workstations,ou=ViaMonstra")
+	oOU.SetInfo
+	
+	Set oOU = oDomain.Create("organizationalUnit", "ou=Service Accounts,ou=ViaMonstra")
+	oOU.SetInfo
+	
+	Set oOU = oDomain.Create("organizationalUnit", "ou=Security Groups,ou=ViaMonstra")
+	oOU.SetInfo
+
+	Set oOU = oDomain.Create("organizationalUnit", "ou=Users,ou=ViaMonstra")
+	oOU.SetInfo
+	
+
+	' Create Users in the Service Accounts OU
+	' Note: the 66048 userAccountControl value is password never expires
+    oLogging.CreateEntry "Create Users in the Service Accounts OU", LogTypeInfo	
+	
+	sOUPath = "LDAP://ou=Service Accounts,ou=ViaMonstra," & oRootDSE.Get("defaultNamingContext")
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=MDT_BA")
+	oUser.Put "SAMAccountName", "MDT_BA"
+	oUser.Put "Description", "MDT Build Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=MDT_JD")
+	oUser.Put "SAMAccountName", "MDT_JD"
+	oUser.Put "Description", "MDT Join Domain Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=CM_NAA")
+	oUser.Put "SAMAccountName", "CM_NAA"
+	oUser.Put "Description", "ConfigMgr Network Access Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=CM_CP")
+	oUser.Put "SAMAccountName", "CM_CP"
+	oUser.Put "Description", "ConfigMgr Client Push Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=CM_SR")
+	oUser.Put "SAMAccountName", "CM_SR"
+	oUser.Put "Description", "ConfigMgr Reporting Services Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=CM_JD")
+	oUser.Put "SAMAccountName", "CM_JD"
+	oUser.Put "Description", "ConfigMgr Join Account"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+	
+	' Create Users in the Users Accounts OU
+	' Note: the 66048 userAccountControl value is password never expires
+    oLogging.CreateEntry "Create Users in the Users Accounts OU", LogTypeInfo	
+	
+	sOUPath = "LDAP://ou=Users,ou=ViaMonstra," & oRootDSE.Get("defaultNamingContext")
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Mike")
+	oUser.Put "SAMAccountName", "Mike"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Johan")
+	oUser.Put "SAMAccountName", "Johan"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Frank")
+	oUser.Put "SAMAccountName", "Frank"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Bob")
+	oUser.Put "SAMAccountName", "Bob"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Michael")
+	oUser.Put "SAMAccountName", "Michael"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Pete")
+	oUser.Put "SAMAccountName", "Pete"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Doris")
+	oUser.Put "SAMAccountName", "Doris"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Ami")
+	oUser.Put "SAMAccountName", "Ami"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Mathilda")
+	oUser.Put "SAMAccountName", "Mathilda"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+	Set oOU = GetObject(sOUPath)
+	Set oUser = oOU.Create("User", "cn=Markus")
+	oUser.Put "SAMAccountName", "Markus"
+	oUser.Put "Description", "Standard User"
+ 	oUser.SetInfo
+
+	oUser.SetPassword "P@ssw0rd"
+	oUser.Put "userAccountControl", 66048
+	oUser.SetInfo
+
+End Function
+
+</script>
+</job>
+

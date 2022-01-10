@@ -1,0 +1,57 @@
+<job id="Configure-SetAdministratorAutologoninDomain">
+<script language="VBScript" src="..\..\scripts\ZTIUtility.vbs"/>
+<script language="VBScript"> 
+
+'//----------------------------------------------------------------------------
+'// Solution: Hydration
+'// Purpose: Used to Configure Administrator Account to Autologon into the Domain
+'// Usage: cscript Configure-SetAdministratorAutologoninDomain.wsf [/debug:true]
+'// Version: 1.3 - August 8, 2012 - Johan Arwidmark
+'//
+'// This script is provided "AS IS" with no warranties, confers no rights and 
+'// is not supported by the authors or Deployment Artist. 
+'//
+'//----------------------------------------------------------------------------
+
+
+
+'//----------------------------------------------------------------------------
+'// Global constant and variable declarations
+'//---------------------------------------------------------------------------- 
+
+Dim iRetVal 
+
+'//----------------------------------------------------------------------------
+'// Main routine
+'//---------------------------------------------------------------------------- 
+
+'On Error Resume Next
+iRetVal = ZTIProcess
+ProcessResults iRetVal
+On Error Goto 0 
+
+Function ZTIProcess() 
+
+	Dim sJoinDomain
+	Dim sAdminPassword
+	Dim sUserName
+	
+	sJoinDomain = oEnvironment.Item("JOINDOMAIN")
+	sAdminPassword = oEnvironment.Item("ADMINPASSWORD")
+	sUserName = "Administrator"
+
+	iRetVal = Success 
+	ZTIProcess = iRetval 
+
+	oLogging.CreateEntry "Configure - Set Administrator Autologon in Domain: Starting", LogTypeInfo	
+	oShell.RegWrite "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoAdminLogon", "1", "REG_SZ"
+	oShell.RegWrite "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\DefaultDomainName", sJoinDomain, "REG_SZ"
+	oShell.RegWrite "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\DefaultPassword", sAdminPassword, "REG_SZ"
+	oShell.RegWrite "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\DefaultUserName", sUserName, "REG_SZ"
+	oShell.RegWrite "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoLogonCount", &H000003e7, "REG_DWORD"
+
+End Function 
+
+</script>
+</job>
+

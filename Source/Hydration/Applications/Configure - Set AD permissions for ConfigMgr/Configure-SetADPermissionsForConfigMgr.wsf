@@ -1,0 +1,128 @@
+<job id="Configure-SetADPermissionsForConfigMgr2012">
+<script language="VBScript" src="..\..\scripts\ZTIUtility.vbs"/>
+<script language="VBScript"> 
+
+'//----------------------------------------------------------------------------
+'// Solution: Hydration
+'// Purpose: Used to create Systems Management container and add permissions
+'// Usage: cscript Configure-SetADPermissionsForConfigMgr2012.wsf [/debug:true]
+'// Version: 1.1 - September 10, 2012 - Johan Arwidmark
+'//
+'// This script is provided "AS IS" with no warranties, confers no rights and 
+'// is not supported by the authors or Deployment Artist. 
+'//
+'//----------------------------------------------------------------------------
+
+'//----------------------------------------------------------------------------
+'// Global constant and variable declaration
+'//---------------------------------------------------------------------------- 
+
+Option Explicit 
+
+Const ADS_ACEFLAG_INHERIT_ACE = 2
+Const ADS_ACETYPE_ACCESS_ALLOWED = 0
+
+Dim iRetVal 
+Dim intRetSts
+
+'//----------------------------------------------------------------------------
+'// End declarations
+'//---------------------------------------------------------------------------- 
+
+'//----------------------------------------------------------------------------
+'// Main routine
+'//---------------------------------------------------------------------------- 
+
+'On Error Resume Next
+iRetVal = ZTIProcess
+ProcessResults iRetVal
+On Error Goto 0 
+
+'//---------------------------------------------------------------------------
+'//
+'// Function: ZTIProcess()
+'//
+'// Input: None
+'// 
+'// Return: Success - 0
+'// Failure - non-zero
+'//
+'// Purpose: Perform main ZTI processing
+'// 
+'//---------------------------------------------------------------------------
+Function ZTIProcess() 
+
+	Dim objRootDSE
+	Dim objADS
+	Dim sComputerName
+	Dim sFullComputerName
+	Dim bFound
+	Dim sPath
+	Dim oCN
+	Dim oSystem
+	Dim oSec
+	Dim oACL
+	Dim oACE
+	Dim o
+
+	'// Build the path to the container
+	Set objRootDSE = GetObject("LDAP://RootDSE") 
+	sPath = "LDAP://CN=System Management,CN=System," & objRootDSE.Get("defaultNamingContext")
+
+	'// Make sure the container exists.  If not, create it.
+	  On Error Resume Next
+	  Set oCN = GetObject(sPath)
+	  If Err then
+	    On Error Goto 0
+	    Set oSystem = GetObject("LDAP://CN=System," & objRootDSE.Get("defaultNamingContext"))
+	    Set oCN = oSystem.Create("container", "cn=System Management")
+	    oCN.SetInfo
+	    oLogging.CreateEntry "Configure AD for ConfigMgr 2012: Created 'System Management' container.", LogTypeInfo	
+	  End if
+	  On Error Goto 0
+
+	  ' Get the ACL of the container
+	  Set oSec = oCN.Get("ntSecurityDescriptor")
+	  Set oACL = oSec.DiscretionaryAcl
+
+	  ' Build the NT4-style name for the computer
+	  sComputerName = oEnvironment.Item("OSDComputerName")
+	  Set objADS = CreateObject("ADSystemInfo")
+	  sFullComputerName = UCase(objADS.DomainShortName & "\" & sComputerName & "$")
+
+	  ' See if the computer is already in the list
+	  For each o in oACL
+	     If UCase(o.Trustee) = sFullComputerName then
+	        bFound = true
+	        Exit For
+	     End if
+	  Next
+	  If bFound then
+	     oLogging.CreateEntry "Configure AD for ConfigMgr 2012: " & sFullComputerName & " already has rights.", LogTypeInfo	
+	     Exit Function
+	  End if
+
+	  ' Not present?  Then add it.  Build a new ACE
+	  Set oACE = CreateObject("AccessControlEntry") 
+	  oACE.AceType = ADS_ACETYPE_ACCESS_ALLOWED 
+	  oACE.AccessMask = -1
+	  oACE.AceFlags = ADS_ACEFLAG_INHERIT_ACE 
+	  oACE.Trustee = sFullComputerName
+
+	  ' Add it to the ACL and apply it to the container
+	  oACL.AddAce oACE
+	  oSec.DiscretionaryAcl = oACL
+	  oCN.Put "ntSecurityDescriptor", Array(oSec)
+	  oCN.SetInfo 
+
+	  oLogging.CreateEntry "Configure AD for ConfigMgr 2012: Successfully granted " & sFullComputerName & " full control access to the System Management container.", LogTypeInfo	
+
+	  ' Cleanup
+	  Set oACE = Nothing
+	  Set oACL = Nothing
+	  Set oSec = Nothing
+
+End Function
+
+</script>
+</job>

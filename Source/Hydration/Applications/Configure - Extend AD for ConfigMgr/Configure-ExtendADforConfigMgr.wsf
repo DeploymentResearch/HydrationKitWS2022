@@ -1,0 +1,97 @@
+<job id="Configure-ExtendADforConfigMgr2012">
+<script language="VBScript" src="..\..\scripts\ZTIUtility.vbs"/>
+<script language="VBScript"> 
+
+'//----------------------------------------------------------------------------
+'// Solution: Hydration
+'// Purpose: Used to Extend the Active Directory schema for ConfigMgr
+'// Usage: cscript Configure-ExtendADforConfigMgr.wsf [/debug:true]
+'// Version: 1.1 - June 24, 2020 - Johan Arwidmark
+'//
+'// This script is provided "AS IS" with no warranties, confers no rights and 
+'// is not supported by the authors or Deployment Artist. 
+'//
+'//----------------------------------------------------------------------------
+
+'//----------------------------------------------------------------------------
+'// Global constant and variable declarations
+'//---------------------------------------------------------------------------- 
+
+Option Explicit 
+
+Dim iRetVal 
+
+'//----------------------------------------------------------------------------
+'// End declarations
+'//---------------------------------------------------------------------------- 
+
+'//----------------------------------------------------------------------------
+'// Main routine
+'//---------------------------------------------------------------------------- 
+
+On Error Resume Next
+iRetVal = ZTIProcess
+ProcessResults iRetVal
+On Error Goto 0 
+
+'//---------------------------------------------------------------------------
+'//
+'// Function: ZTIProcess()
+'//
+'// Input: None
+'// 
+'// Return: Success - 0
+'// Failure - non-zero
+'//
+'// Purpose: Perform main ZTI processing
+'// 
+'//---------------------------------------------------------------------------
+Function ZTIProcess() 
+
+	Dim sFile
+
+	sFile =  oEnvironment.Item("DeployRoot") & "\Applications\Install - ConfigMgr\Source\SMSSETUP\BIN\X64\extadsch.exe"
+	If not oFSO.FileExists(sFile) then
+		oLogging.CreateEntry "Extend ConfigMgr Schema: " & sFile & " was not found, unable to extend ConfigMgr Schema", LogTypeWarning
+		ZTIProcess = Failure
+		Exit Function
+	End if
+		
+	'// Extend Schema
+	iRetVal = oUtility.RunWithHeartbeat(sFile)
+	
+	'Verify Schema Extension is sucessfull
+	if VerifySchemaExtension > 0 then 
+		oLogging.CreateEntry "Extend ConfigMgr Schema: Schema extended successfully", LogTypeInfo
+		iRetVal = Success 
+	else
+		oLogging.CreateEntry "Extend ConfigMgr Schema: Unable to verify if was Schema extended successfully", LogTypeWarning
+		iRetVal = Failure
+	End if
+
+End Function 
+	
+Function VerifySchemaExtension()
+
+	Dim objRegEx, objFSO, objFile
+	Dim strSearchString, colMatches
+
+	Const ForReading = 1
+
+	Set objRegEx = CreateObject("VBScript.RegExp")
+	objRegEx.Global = True   
+	objRegEx.Pattern = "Successfully extended the Active Directory schema"
+
+	Set objFSO = CreateObject("Scripting.FileSystemObject")
+	Set objFile = objFSO.OpenTextFile("C:\ExtADSch.log", ForReading)
+	strSearchString = objFile.ReadAll
+	objFile.Close
+
+	Set colMatches = objRegEx.Execute(strSearchString)  
+
+	VerifySchemaExtension = colMatches.Count
+
+End Function
+
+</script>
+</job>
