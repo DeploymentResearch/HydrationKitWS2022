@@ -131,6 +131,8 @@ Set-ItemProperty -Path MEDIA001: -Name Boot.x64.FeaturePacks -Value ""
 $ScriptPath = $PSScriptRoot
 Copy-Item -Path "$ScriptPath\Source\Hydration\Applications" -Destination "$Path\DS" -Recurse -Force
 Copy-Item -Path "$ScriptPath\Source\Hydration\Control" -Destination "$Path\DS" -Recurse -Force
-Copy-Item -Path "$ScriptPath\Source\Hydration\Operating Systems" -Destination "$Path\DS" -Recurse -Force
 Copy-Item -Path "$ScriptPath\Source\Hydration\Scripts" -Destination "$Path\DS" -Recurse -Force
 Copy-Item -Path "$ScriptPath\Source\Media\Control" -Destination "$Path\ISO\Content\Deploy" -Recurse -Force
+
+# Create target folder structure for the operating systems
+New-Item -Path "$Path\DS\Operating Systems\WS2022\sources\sxs" -ItemType Directory -Force
