@@ -25,6 +25,9 @@
     .PARAMETER VMNetwork
     Specify the Hyper-V Virtual Network.
 
+    .PARAMETER SelectVMs
+    Specify the VMs that should be created. If this parameter is not specified, all are created. (DC01, CM01, MDT01, DP01, FS01)
+
 #>
 
 # Requires the script to be run under an administrative account context.
@@ -41,17 +44,31 @@ param(
     [string]$ISO,
     [parameter(Mandatory=$true, HelpMessage="Specify the Hyper-V Virtual Network.")]
     [ValidateNotNullOrEmpty()]
-    [string]$VMNetwork
+    [string]$VMNetwork,
+    [parameter(Mandatory = $false, HelpMessage = "Specify the VMs to be created (DC, CM, MDT, DP, FS). All VMs are created by default.")]
+    [ValidateNotNullOrEmpty()]
+    $SelectVMs = @('DC', 'CM', 'MDT', 'DP', 'FS')
 )
 
 # Below are details for each VM
 $VMSettings = @()
-$VMSettings += [pscustomobject]@{ VMName = "CM01"; VMMemory = 16384MB;VMDiskSize = 300GB;VMCPUCount = 4 }
-$VMSettings += [pscustomobject]@{ VMName = "DC01"; VMMemory = 2048MB;VMDiskSize = 100GB;VMCPUCount = 2 }
-$VMSettings += [pscustomobject]@{ VMName = "DP01"; VMMemory = 4096MB;VMDiskSize = 300GB;VMCPUCount = 2 }
-$VMSettings += [pscustomobject]@{ VMName = "FS01"; VMMemory = 2048MB;VMDiskSize = 300GB;VMCPUCount = 2 }
-$VMSettings += [pscustomobject]@{ VMName = "MDT01"; VMMemory = 4096MB;VMDiskSize = 300GB;VMCPUCount = 2 }
-
+switch ($SelectVMs) {
+    'CM' {
+        $VMSettings += [pscustomobject]@{ VMName = "CM01"; VMMemory = 16384MB; VMDiskSize = 300GB; VMCPUCount = 4 }
+    }
+    'DC' {
+        $VMSettings += [pscustomobject]@{ VMName = "DC01"; VMMemory = 2048MB; VMDiskSize = 100GB; VMCPUCount = 2 }
+    }
+    'DP' {
+        $VMSettings += [pscustomobject]@{ VMName = "DP01"; VMMemory = 4096MB; VMDiskSize = 300GB; VMCPUCount = 2 }
+    }
+    'FS' {
+        $VMSettings += [pscustomobject]@{ VMName = "FS01"; VMMemory = 2048MB; VMDiskSize = 300GB; VMCPUCount = 2 }
+    }
+    'MDT' {
+        $VMSettings += [pscustomobject]@{ VMName = "MDT01"; VMMemory = 4096MB; VMDiskSize = 300GB; VMCPUCount = 2 }
+    }
+}
 
 # Verify that the Hydration Kit ISO path exist
 if (!(Test-Path -Path "$ISO")) {
