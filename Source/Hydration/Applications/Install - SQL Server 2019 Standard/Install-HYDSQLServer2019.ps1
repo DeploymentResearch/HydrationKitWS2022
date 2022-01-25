@@ -129,7 +129,7 @@ If ($SQLSYSADMINACCOUNTS -ne ""){
     $TempFolder = "C:\Windows\Temp"
     Copy-Item -Path $ConfigurationFile -Destination $TempFolder
     $FinalConfigurationFile = "$TempFolder\ConfigurationFile.ini"
-    $ConfigurationFileData = Get-Content $ConfigurationFileData 
+    $ConfigurationFileData = Get-Content $FinalConfigurationFile 
     $OriginalSQLSYSADMINACCOUNTS = "SQLSYSADMINACCOUNTS=`"VIAMONSTRA\Administrator`" `"BUILTIN\Administrators`""
     $UpdatedSQLSYSADMINACCOUNTS = "SQLSYSADMINACCOUNTS=`"$SQLSYSADMINACCOUNTS`" `"BUILTIN\Administrators`"" # always add local administrators
     $ConfigurationFileData | ForEach-Object { $_.replace("$OriginalSQLSYSADMINACCOUNTS","$UpdatedSQLSYSADMINACCOUNTS") } | Set-Content $ConfigurationFileData
