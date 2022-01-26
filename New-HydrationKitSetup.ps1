@@ -116,7 +116,7 @@ $MDTServer = (get-wmiobject win32_computersystem).Name
 
 Add-PSSnapIn Microsoft.BDD.PSSnapIn -ErrorAction SilentlyContinue | Out-Null
 New-Item -Path "$Path\DS" -ItemType Directory | Out-Null
-New-SmbShare –Name $ShareName –Path "$Path\DS" –ChangeAccess EVERYONE | Out-Null
+New-SmbShare â€“Name $ShareName â€“Path "$Path\DS" â€“ChangeAccess EVERYONE | Out-Null
 New-PSDrive -Name "DS001" -PSProvider "MDTProvider" -Root "$Path\DS" -Description "Hydration Kit ConfigMgr" -NetworkPath "\\$MDTServer\$ShareName" | add-MDTPersistentDrive | Out-Null
 
 New-Item -Path "$Path\ISO\Content\Deploy" -ItemType Directory | Out-Null
@@ -136,3 +136,13 @@ Copy-Item -Path "$ScriptPath\Source\Media\Control" -Destination "$Path\ISO\Conte
 
 # Create target folder structure for the operating systems
 New-Item -Path "$Path\DS\Operating Systems\WS2022\sources\sxs" -ItemType Directory -Force
+
+# Create target folder structure for application sources
+New-Item -Path "$Path\DS\Applications\Install - SQL Server Management Studio" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - Windows ADK 11\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Standard\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - ConfigMgr\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - ConfigMgr\PreReqs" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - MDT" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Express\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Reporting Services\Source" -ItemType Directory -Force
