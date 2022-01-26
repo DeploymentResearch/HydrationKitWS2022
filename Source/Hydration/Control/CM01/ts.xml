@@ -752,6 +752,13 @@
     </step>
   </group>
   <group expand="true" name="Install ConfigMgr Prereqs (IIS, Features)" description="" disable="false" continueOnError="false">
+    <step type="BDD_InstallApplication" name="Configure - Create NO_SMS_ON_DRIVE" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{87431024-4792-4971-a5fa-ab86e4497412}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
     <action />
     <step type="BDD_InstallRoles" name="Install ConfigMgr Prereqs" description="Install BITS, Remote Differential Compression, Web Server, and additional NET features" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
       <defaultVarList>
@@ -881,6 +888,45 @@
     <step type="BDD_InstallApplication" name="Configure - MDT Integration with ConfigMgr" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
       <defaultVarList>
         <variable name="ApplicationGUID" property="ApplicationGUID">{d8037969-01c4-4737-b5c4-01106199f1a8}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
+  </group>
+  <group expand="true" name="Install ConfigMgr Roles" description="" disable="false" continueOnError="false">
+    <action />
+    <step type="BDD_InstallApplication" name="Install - ConfigMgr Reporting Services Point" description="" disable="true" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{61599e04-5d03-476f-8534-70e4ae7b9f3b}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
+    <step type="BDD_InstallApplication" name="Install - WSUS" description="" disable="true" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{48e60038-0ced-4524-aac1-73cbc16a8048}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
+    <step type="BDD_InstallApplication" name="Configure - WSUS Settings" description="" disable="true" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{1c66ecc0-d936-4d4f-b1a8-8bbf6abb127e}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
+    <step type="SMS_TaskSequence_RebootAction" name="Restart computer" description="" disable="true" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="SMSRebootMessage" property="Message" />
+        <variable name="SMSRebootTimeout" property="MessageTimeout">60</variable>
+        <variable name="SMSRebootTarget" property="Target" />
+      </defaultVarList>
+      <action>smsboot.exe /target:WinPE</action>
+    </step>
+    <step type="BDD_InstallApplication" name="Install - ConfigMgr Software Update Point" description="" disable="true" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{1a808b1c-52f2-45b4-8af1-17ce79bd3b8c}</variable>
         <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
       </defaultVarList>
       <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
