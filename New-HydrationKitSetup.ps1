@@ -116,7 +116,7 @@ $MDTServer = (get-wmiobject win32_computersystem).Name
 
 Add-PSSnapIn Microsoft.BDD.PSSnapIn -ErrorAction SilentlyContinue | Out-Null
 New-Item -Path "$Path\DS" -ItemType Directory | Out-Null
-New-SmbShare –Name $ShareName –Path "$Path\DS" –ChangeAccess EVERYONE | Out-Null
+New-SmbShare -Name $ShareName -Path "$Path\DS" �ChangeAccess EVERYONE | Out-Null
 New-PSDrive -Name "DS001" -PSProvider "MDTProvider" -Root "$Path\DS" -Description "Hydration Kit ConfigMgr" -NetworkPath "\\$MDTServer\$ShareName" | add-MDTPersistentDrive | Out-Null
 
 New-Item -Path "$Path\ISO\Content\Deploy" -ItemType Directory | Out-Null
