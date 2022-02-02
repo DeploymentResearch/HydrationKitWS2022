@@ -411,6 +411,36 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 - Network: **Your lab network**
 - Image file (ISO): **C:\CMLab\ISO\HydrationCMWS2022.iso**
 
+## Next Steps - Optional Post-ConfigMgr Install Tasks
+
+This kit has pre-configured steps that can automatically install Configuration Manager roles depending on the goals for your lab. These steps are disabled by default and if no customizations were made to the kit, they can be enabled without adjustment.
+
+![Optional Role Install Tasks.](docs/CM01OptionalRoles.png)
+
+*Optional Post-ConfigMgr Install Tasks*
+
+Currently, the kit supports the following tasks:
+
+- Reporting Services Point
+- Software Update Point
+
+Reporting Services Point credentials and SSRS Instance can be updated in the following file:
+
+- C:\CMLab\DS\Applications\Install - ConfigMgr Reporting Services Point\HYDCMRSPConfig.PS1
+
+Software Update Point requires additional tasks to be enabled:
+
+- Install - WSUS
+- Configure - WSUS Settings
+  - Settings based on [Invoke-WSUSConfiguration.ps1](https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Invoke-WSUSConfiguration.ps1)
+  - More information at [Fixing WSUS – When the Best Defense is a Good Offense](https://www.deploymentresearch.com/fixing-wsus-when-the-best-defense-is-a-good-offense/)
+
+WSUSContent directory and SQL Server config can be updated in the following file:
+
+- C:\CMLab\DS\Applications\Install - WSUS\HYDWSUSConfig.ps1
+
+>**Note:** The first sync of WSUS always takes some time. It may be several hours before new products are shown in the site's Software Update Point configuration. You can track WSUS synchronization by viewing WSyncMgr.log on CM01.
+
 ## Next Steps - Customizing the Hydration Kit
 
 Below is a quick walk through of items to change if you need to customize the kit.  For a broader scope, please see the post [Customizing the ViaMonstra Hydration Kit](https://deploymentresearch.com/601/Customizing-the-ViaMonstra-Hydration-Kit).
