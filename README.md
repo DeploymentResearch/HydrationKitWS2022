@@ -19,7 +19,7 @@ This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure runn
       - [Optional: Populate the hydration deployment share with files for MDT01](#optional-populate-the-hydration-deployment-share-with-files-for-mdt01)
     - [Step 4: Create the bootable Hydration Kit ISO (MDT offline media item)](#step-4-create-the-bootable-hydration-kit-iso-mdt-offline-media-item)
     - [Step 5: Create and Deploy the virtual machines](#step-5-create-and-deploy-the-virtual-machines)
-  - [Option Post-ConfigMgr Install Tasks](#next-steps-optional-post-configmgr-install-tasks)
+  - [Optional Post-ConfigMgr Install Tasks](#next-steps-optional-post-configmgr-install-tasks)
   - [Customizing the Hydration Kit](#next-steps-customizing-the-hydration-kit)
 
 Download from GitHub: <https://github.com/DeploymentResearch/HydrationKitWS2022>
