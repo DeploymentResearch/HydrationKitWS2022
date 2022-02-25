@@ -19,6 +19,7 @@ This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure runn
       - [Optional: Populate the hydration deployment share with files for MDT01](#optional-populate-the-hydration-deployment-share-with-files-for-mdt01)
     - [Step 4: Create the bootable Hydration Kit ISO (MDT offline media item)](#step-4-create-the-bootable-hydration-kit-iso-mdt-offline-media-item)
     - [Step 5: Create and Deploy the virtual machines](#step-5-create-and-deploy-the-virtual-machines)
+  - [Optional Post-ConfigMgr Install Tasks](#next-steps-optional-post-configmgr-install-tasks)
   - [Customizing the Hydration Kit](#next-steps-customizing-the-hydration-kit)
 
 Download from GitHub: <https://github.com/DeploymentResearch/HydrationKitWS2022>
@@ -410,6 +411,36 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 - Memory: **4 GB** (static memory)
 - Network: **Your lab network**
 - Image file (ISO): **C:\CMLab\ISO\HydrationCMWS2022.iso**
+
+## Next Steps - Optional Post-ConfigMgr Install Tasks
+
+This kit has pre-configured steps that can automatically install Configuration Manager roles depending on the goals for your lab. These steps are disabled by default and if no customizations were made to the kit, they can be enabled without adjustment.
+
+![Optional Role Install Tasks.](docs/CM01OptionalRoles.png)
+
+*Optional Post-ConfigMgr Install Tasks*
+
+Currently, the kit supports the following tasks:
+
+- Reporting Services Point
+- Software Update Point
+
+Reporting Services Point credentials and SSRS Instance can be updated in the following file:
+
+- C:\CMLab\DS\Applications\Install - ConfigMgr Reporting Services Point\HYDCMRSPConfig.PS1
+
+Software Update Point requires additional tasks to be enabled:
+
+- Install - WSUS
+- Configure - WSUS Settings
+  - Settings based on [Invoke-WSUSConfiguration.ps1](https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Invoke-WSUSConfiguration.ps1)
+  - More information at [Fixing WSUS – When the Best Defense is a Good Offense](https://www.deploymentresearch.com/fixing-wsus-when-the-best-defense-is-a-good-offense/)
+
+WSUSContent directory and SQL Server config can be updated in the following file:
+
+- C:\CMLab\DS\Applications\Install - WSUS\HYDWSUSConfig.ps1
+
+>**Note:** The first sync of WSUS always takes some time. It may be several hours before new products are shown in the site's Software Update Point configuration. You can track WSUS synchronization by viewing WSyncMgr.log on CM01.
 
 ## Next Steps - Customizing the Hydration Kit
 
