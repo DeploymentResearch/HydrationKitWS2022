@@ -140,6 +140,7 @@ New-Item -Path "$Path\DS\Operating Systems\WS2022\sources\sxs" -ItemType Directo
 # Create target folder structure for application sources
 New-Item -Path "$Path\DS\Applications\Install - SQL Server Management Studio" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - Windows ADK 11\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - Windows ADK 11 WinPE Addon\Source" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Standard\Source" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - ConfigMgr\Source" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - ConfigMgr\PreReqs" -ItemType Directory -Force
