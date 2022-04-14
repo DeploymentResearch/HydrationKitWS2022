@@ -123,6 +123,7 @@ $SetupFile = "$SourcePath\Source\Setup.exe"
 $ConfigurationFile = "$SourcePath\ConfigurationFile.ini"
 
 # If SQLSYSADMINACCOUNTS is specified in the CM01.INI file, copy configuration file to a temporary location so it can be updated
+$tsenv = New-Object -COMobject Microsoft.SMS.TSEnvironment
 $ConfigurationFile = "$SourcePath\ConfigurationFile.ini"
 $SQLSYSADMINACCOUNTS = $tsenv.Value("SQLSYSADMINACCOUNTS")
 If ($SQLSYSADMINACCOUNTS -ne ""){
