@@ -764,7 +764,7 @@
       <defaultVarList>
         <variable name="OSRoles" property="OSRoles">Web-Server,Web-WebServer,Web-Common-Http,Web-Health,Web-Performance,Web-Security,Web-App-Dev,Web-Mgmt-Tools,Web-Mgmt-Compat</variable>
         <variable name="OSRoleServices" property="OSRoleServices">FS-FileServer,Web-Default-Doc,Web-Dir-Browsing,Web-Static-Content,Web-Http-Redirect,Web-Http-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Stat-Compression,Web-Dyn-Compression,Web-Filtering,Web-Windows-Auth,Web-Net-Ext,Web-Net-Ext45,Web-Asp-Net,Web-Asp-Net45,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Metabase,Web-WMI</variable>
-        <variable name="OSFeatures" property="OSFeatures">NET-HTTP-Activation,NET-Non-HTTP-Activ,NET-Framework-45-Core,NET-Framework-45-ASPNET,NET-WCF-HTTP-Activation45,BITS,RDC</variable>
+        <variable name="OSFeatures" property="OSFeatures">NET-Framework-Features,NET-Framework-Core,NET-HTTP-Activation,NET-Non-HTTP-Activ,NET-Framework-45-Core,NET-Framework-45-ASPNET,NET-WCF-HTTP-Activation45,BITS,RDC</variable>
         <variable name="OSRoleIndex" property="OSRoleIndex">15</variable>
       </defaultVarList>
       <action>cscript.exe "%SCRIPTROOT%\ZTIOSRole.wsf"</action>
