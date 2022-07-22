@@ -441,7 +441,7 @@
       <action>smsboot.exe /target:WinPE</action>
     </step>
   </group>
-  <group name="State Restore" disable="false" continueOnError="false" description="" expand="false">
+  <group name="State Restore" disable="false" continueOnError="false" description="" expand="true">
     <condition>
       <expression type="SMS_TaskSequence_VariableConditionExpression">
         <variable name="Variable">PHASE</variable>
@@ -449,6 +449,13 @@
         <variable name="Value">STATERESTORE</variable>
       </expression>
     </condition>
+    <step type="SMS_TaskSequence_ApplyNetworkSettingsAction" name="Apply Network Settings" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="OSDAdapterCount" property="NumAdapters">0</variable>
+        <variable name="OSDAdapter" property="Adapters">0</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTINICConfig.wsf"</action>
+    </step>
     <step type="BDD_Gather" name="Gather local only" disable="false" continueOnError="false" successCodeList="0 3010" description="" startIn="">
       <defaultVarList>
         <variable name="GatherLocalOnly" property="GatherLocalOnly">true</variable>
