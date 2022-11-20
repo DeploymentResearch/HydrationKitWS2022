@@ -392,7 +392,7 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 
 #### **Deploying DP01 (Optional)**
 
-Once the domain controller (DC01) is up and running, you can deploy the optional DP01 virtual machine. Don't forget to leave DC01 running while deploying DP01 since it is joining the domain during deployment. Use the following settings for the MDT01 virtual machine:
+Once the domain controller (DC01) is up and running, you can deploy the optional DP01 virtual machine. Don't forget to leave DC01 running while deploying DP01 since it is joining the domain during deployment. Use the following settings for the DP01 virtual machine:
 
 - Name: **DP01**
 - CPU: **2 vCPU**
@@ -403,7 +403,7 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 
 #### **Deploying FS01 (Optional)**
 
-Once the domain controller (DC01) is up and running, you can deploy the optional FS01 virtual machine. Don't forget to leave DC01 running while deploying FS01 since it is joining the domain during deployment. Use the following settings for the MDT01 virtual machine:
+Once the domain controller (DC01) is up and running, you can deploy the optional FS01 virtual machine. Don't forget to leave DC01 running while deploying FS01 since it is joining the domain during deployment. Use the following settings for the FS01 virtual machine:
 
 - Name: **FS01**
 - CPU: **2 vCPU**
