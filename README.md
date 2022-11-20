@@ -96,7 +96,7 @@ Shorthand, to build the virtual machines there are five main steps you need to d
 
 ## Step 1 - Download the software
 
-On the Windows machine (client or server) that you use to manage Hyper-V or VMware, create a folder for all the software needed, for example **C:\Setup**.
+On the Windows machine (client or server, 64 bit) that you use to manage Hyper-V or VMware, create a folder for all the software needed, for example **C:\Setup**.
 
 Then, for the main servers (DC01 and CM01), you need to download the following software:
 
@@ -214,7 +214,7 @@ The folder you used should now have a sub-folder named Source, two PowerShell sc
 
 Next step is to start copying the various installation files to the correct folder.
 
-1\. Copy your **Windows Server 2022 reference image** (have to be named **REFWS2022-001.wim**, case sensitive), to the following folder: **C:\CMLab\DS\Operating SystemsWS2022**
+1\. Copy your **Windows Server 2022 reference image** (have to be named **REFWS2022-001.wim**, case sensitive), to the following folder: **C:\CMLab\DS\Operating Systems\WS2022**
 
 **Note #1:** The WIM image should only have a single index with the **Windows Server 2022 with Desktop Experience** edition. Please use the script to extract the correct index from a Windows Server 2022 ISO file.
 
