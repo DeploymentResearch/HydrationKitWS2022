@@ -104,7 +104,7 @@ Then, for the main servers (DC01 and CM01), you need to download the following s
 - MDT 8456 (The kit is based on that platform): <https://www.microsoft.com/en-us/download/details.aspx?id=54259>
 - MDT 8456 Hotfix: <https://download.microsoft.com/download/3/0/6/306AC1B2-59BE-43B8-8C65-E141EF287A5E/KB4564442/MDT_KB4564442.exe>
 - BGInfo: [http://technet.microsoft.com/en-us/sysinternals/bginfo](https://technet.microsoft.com/en-us/sysinternals/bginfo)
-- A Windows Server 2022 Standard WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows Server 2022 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-WindowsServer2019WIMfromISO.ps1>
+- A Windows Server 2022 Standard WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows Server 2022 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-WindowsServer2022WIMfromISO.ps1>
 - SQL Server 2019 Standard x64: Either a fully licensed version from VLSC or MSDN, or a 180 days trial version from the Microsoft Evaluation Center: <https://www.microsoft.com/en-us/evalcenter/>
 - SQL Server 2019 Cumulative Update (CU) 14 (or later): [https://www.microsoft.com/en-us/download/details.aspx?id=100809](https://www.microsoft.com/en-us/download/details.aspx?id=100809) (ConfigMgr only requires CU 5 for SQL Server 2019, but I recommend using the latest CU).
 - SQL Server 2019 Reporting Services: <https://www.microsoft.com/en-us/download/details.aspx?id=100122>
