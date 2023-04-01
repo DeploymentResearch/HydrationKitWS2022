@@ -22,7 +22,14 @@ Start-Transcript $logFile
 Write-Host "Logging to $logFile" 
 
 # Configure Enterprise CA
-Install-AdcsCertificationAuthority `    –CAType EnterpriseRootCA `    –CACommonName "ViaMonstraRootCA" `    –KeyLength 2048 `    –HashAlgorithm SHA1 `    –CryptoProviderName "RSA#Microsoft Software Key Storage Provider" `    -ValidityPeriod Years `    -ValidityPeriodUnits 5 `
+Install-AdcsCertificationAuthority `
+    -CAType EnterpriseRootCA `
+    -CACommonName "ViaMonstraRootCA" `
+    -KeyLength 2048 `
+    -HashAlgorithm SHA1 `
+    -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" `
+    -ValidityPeriod Years `
+    -ValidityPeriodUnits 5 `
     -Force
 
 # Stop logging 
