@@ -26,9 +26,9 @@ New-ADReplicationSite -Name Stockholm
 New-ADReplicationSite -Name Liverpool
 
 # Create AD Subnets 
-New-ADReplicationSubnet -Name "192.168.1.0/24" -Site NewYork
-New-ADReplicationSubnet -Name "192.168.2.0/24" -Site Stockholm
-New-ADReplicationSubnet -Name "192.168.3.0/24" -Site Liverpool
+New-ADReplicationSubnet -Name "192.168.25.0/24" -Site NewYork
+New-ADReplicationSubnet -Name "192.168.26.0/24" -Site Stockholm
+New-ADReplicationSubnet -Name "192.168.27.0/24" -Site Liverpool
 
 # Stop logging 
 Stop-Transcript

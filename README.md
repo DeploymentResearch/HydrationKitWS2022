@@ -34,7 +34,7 @@ Download from GitHub: <https://github.com/DeploymentResearch/HydrationKitWS2022>
 
 ## Notes
 
-**Customizations:** This hydration kit install all servers in the corp.viamonstra.com domain, on the 192.168.1.0/24 network. If you rather use your own domain, different IP addresses etc. check out the ***Next Step - Customizing the Hydration Kit*** section in the end of this post for instructions on how to customize this kit. That being said, I recommend getting to know the kit using the default names if you can.
+**Customizations:** This hydration kit install all servers in the corp.viamonstra.com domain, on the 192.168.25.0/24 network. If you rather use your own domain, different IP addresses etc. check out the ***Next Step - Customizing the Hydration Kit*** section in the end of this post for instructions on how to customize this kit. That being said, I recommend getting to know the kit using the default names if you can.
 
 **Internal network and Internet Access:** Since one of the virtual machines (DC01) is also a DHCP Server, its highly recommended to deploy the virtual machines on an internal virtual network, and then use the NAT feature in either Hyper-V or VMware to give the virtual machines Internet access. For super-easy Internet access on Hyper-V, while still having the VMs on an isolated network, read this shiny post from [Ami Arwidmark (@AArwidmark)](https://twitter.com/AArwidmark):
 
