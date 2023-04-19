@@ -1,0 +1,7 @@
+Name,Path
+ViaMonstra,"dc=corp,dc=viamonstra,dc=com"
+Servers,"OU=ViaMonstra,dc=corp,dc=viamonstra,dc=com"
+Workstations,"OU=ViaMonstra,dc=corp,dc=viamonstra,dc=com"
+Service Accounts,"OU=ViaMonstra,dc=corp,dc=viamonstra,dc=com"
+Security Groups,"OU=ViaMonstra,dc=corp,dc=viamonstra,dc=com"
+Users,"OU=ViaMonstra,dc=corp,dc=viamonstra,dc=com"

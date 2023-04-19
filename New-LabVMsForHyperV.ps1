@@ -26,7 +26,7 @@
     Specify the Hyper-V Virtual Network.
 
     .PARAMETER SelectVMs
-    Specify the VMs that should be created. If this parameter is not specified, all are created. (DC01, CM01, MDT01, DP01, FS01)
+    Specify the VMs that should be created. If this parameter is not specified, all server VMs are created. (DC01, CM01, MDT01, DP01, FS01)
 
 #>
 
@@ -45,9 +45,9 @@ param(
     [parameter(Mandatory=$true, HelpMessage="Specify the Hyper-V Virtual Network.")]
     [ValidateNotNullOrEmpty()]
     [string]$VMNetwork,
-    [parameter(Mandatory = $false, HelpMessage = "Specify the VMs to be created (DC, CM, MDT, DP, FS). All VMs are created by default.")]
+    [parameter(Mandatory = $false, HelpMessage = "Specify the VMs to be created (DC, CM, MDT, DP, FS, Clients). All Server VMs are created by default.")]
     [ValidateNotNullOrEmpty()]
-    $SelectVMs = @('DC', 'CM', 'MDT', 'DP', 'FS')
+    $SelectVMs = @('DC', 'CM', 'MDT', 'DP', 'FS', 'Clients')
 )
 
 # Below are details for each VM
@@ -67,6 +67,12 @@ switch ($SelectVMs) {
     }
     'MDT' {
         $VMSettings += [pscustomobject]@{ VMName = "MDT01"; VMMemory = 4096MB; VMDiskSize = 300GB; VMCPUCount = 2 }
+    }
+    'Clients' {
+        $VMSettings += [pscustomobject]@{ VMName = "PC0001"; VMMemory = 4096MB; VMDiskSize = 60GB; VMCPUCount = 2 }
+        $VMSettings += [pscustomobject]@{ VMName = "PC0002"; VMMemory = 4096MB; VMDiskSize = 60GB; VMCPUCount = 2 }
+        $VMSettings += [pscustomobject]@{ VMName = "PC0003"; VMMemory = 4096MB; VMDiskSize = 60GB; VMCPUCount = 2 }
+        $VMSettings += [pscustomobject]@{ VMName = "PC0004"; VMMemory = 4096MB; VMDiskSize = 60GB; VMCPUCount = 2 }
     }
 }
 

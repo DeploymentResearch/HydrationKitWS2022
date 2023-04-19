@@ -132,10 +132,13 @@ $ScriptPath = $PSScriptRoot
 Copy-Item -Path "$ScriptPath\Source\Hydration\Applications" -Destination "$Path\DS" -Recurse -Force
 Copy-Item -Path "$ScriptPath\Source\Hydration\Control" -Destination "$Path\DS" -Recurse -Force
 Copy-Item -Path "$ScriptPath\Source\Hydration\Scripts" -Destination "$Path\DS" -Recurse -Force
+Copy-Item -Path "$ScriptPath\Source\Hydration\Tools\Modules" -Destination "$Path\DS\Tools" -Recurse -Force -verbose
 Copy-Item -Path "$ScriptPath\Source\Media\Control" -Destination "$Path\ISO\Content\Deploy" -Recurse -Force
 
 # Create target folder structure for the operating systems
 New-Item -Path "$Path\DS\Operating Systems\WS2022\sources\sxs" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Operating Systems\Windows 10\sources\sxs" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Operating Systems\Windows 11\sources\sxs" -ItemType Directory -Force
 
 # Create target folder structure for application sources
 New-Item -Path "$Path\DS\Applications\Install - SQL Server Management Studio" -ItemType Directory -Force

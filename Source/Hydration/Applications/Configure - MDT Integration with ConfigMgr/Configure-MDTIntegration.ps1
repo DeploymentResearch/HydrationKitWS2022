@@ -1,4 +1,10 @@
-﻿# Check for elevation
+﻿$TSEnv = New-Object -COMObject Microsoft.SMS.TSEnvironment 
+$Deployroot = $tsenv.Value("DeployRoot")
+$env:PSModulePath = $env:PSModulePath + ";$deployRoot\Tools\Modules"
+
+Import-Module -Name HydrationLogging
+
+# Check for elevation
 If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
     [Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
