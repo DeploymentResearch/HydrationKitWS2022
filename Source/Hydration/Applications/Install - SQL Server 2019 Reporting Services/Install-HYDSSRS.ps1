@@ -53,7 +53,7 @@ Write-HYDLog "Starting configuration of SSRS"
 # by Sven Aelterman (@svenaelterman)
 #############################################################
 function Get-ConfigSet(){
-	return Get-WmiObject –namespace "root\Microsoft\SqlServer\ReportServer\RS_SSRS\v15\Admin" `
+	return Get-WmiObject -Namespace"root\Microsoft\SqlServer\ReportServer\RS_SSRS\v15\Admin" `
 		-class MSReportServer_ConfigurationSetting -ComputerName localhost
 }
 
@@ -114,7 +114,7 @@ If (! $configset.IsInitialized)
 	$configset.ListReportServersInDatabase()
 	$configset.ListReservedUrls();
 
-	$inst = Get-WmiObject –namespace "root\Microsoft\SqlServer\ReportServer\RS_SSRS\v15" `
+	$inst = Get-WmiObject -Namespace "root\Microsoft\SqlServer\ReportServer\RS_SSRS\v15" `
 		-class MSReportServer_Instance -ComputerName localhost
 
 	$inst.GetReportServerUrls()
