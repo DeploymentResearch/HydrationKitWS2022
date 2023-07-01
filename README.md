@@ -8,6 +8,7 @@ This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure runn
     - [Servers](#servers)
       - [Main servers](#main-servers)
       - [Optional supporting servers](#optional-supporting-servers)
+    - [Clients](#clients)
   - [Setup Overview](#setup-overview)
   - [Step-by-Step Guides](#step-by-step-guides)
     - [Step 1: Download the software](#step-1-download-the-software)
@@ -74,7 +75,6 @@ This kit allows you to automatically deploy the below list of servers. The serve
 
 ### Clients
 This kit also allows you to automatically deploy the below list of clients for management. 
-#### Optional clients
 
 - **PC001**. Windows 10 Enterprise
 - **PC002**. Windows 10 Enterprise
