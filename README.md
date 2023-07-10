@@ -1,6 +1,6 @@
 # Hydration Kit For Windows Server 2022, SQL Server 2019 and ConfigMgr Current Branch
 
-This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure running on **Windows Server 2022** and **SQL Server 2019**. This kit is tested on both Hyper-V and VMware virtual platforms, but should work fine on other virtualization platforms like Virtual Box, KVM etc.
+This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure running on **Windows Server 2022** and **SQL Server 2019**, including optional **Windows 10** and **Windows 11** clients. This kit is tested on both Hyper-V and VMware virtual platforms, but should work fine on other virtualization platforms like Virtual Box, KVM etc.
 
 - [Hydration Kit For Windows Server 2022, SQL Server 2019 and ConfigMgr Current Branch](#hydration-kit-for-windows-server-2022-sql-server-2019-and-configmgr-current-branch)
   - [Notes](#notes)
@@ -8,6 +8,7 @@ This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure runn
     - [Servers](#servers)
       - [Main servers](#main-servers)
       - [Optional supporting servers](#optional-supporting-servers)
+    - [Clients](#clients)
   - [Setup Overview](#setup-overview)
   - [Step-by-Step Guides](#step-by-step-guides)
     - [Step 1: Download the software](#step-1-download-the-software)
@@ -72,6 +73,14 @@ This kit allows you to automatically deploy the below list of servers. The serve
 - **FS01**. Windows Server 2022, File Server
 - **DP01**. Windows Server 2022, additional ConfigMgr DP
 
+### Clients
+This kit also allows you to automatically deploy the below list of clients for management. 
+
+- **PC001**. Windows 10 Enterprise
+- **PC002**. Windows 10 Enterprise
+- **PC003**. Windows 11 Enterprise
+- **PC004**. Windows 11 Enterprise
+
 ## Setup Overview
 
 Shorthand, to build the virtual machines there are five main steps you need to do:
@@ -105,6 +114,8 @@ Then, for the main servers (DC01 and CM01), you need to download the following s
 - MDT 8456 Hotfix: <https://download.microsoft.com/download/3/0/6/306AC1B2-59BE-43B8-8C65-E141EF287A5E/KB4564442/MDT_KB4564442.exe>
 - BGInfo: [http://technet.microsoft.com/en-us/sysinternals/bginfo](https://technet.microsoft.com/en-us/sysinternals/bginfo)
 - A Windows Server 2022 Standard WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows Server 2022 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-WindowsServer2022WIMfromISO.ps1>
+- A Windows 10 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 10 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows10EnterpriseWIMFromISO.ps1>
+- A Windows 11 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 11 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows11EnterpriseWIMFromISO.ps1>
 - SQL Server 2019 Standard x64: Either a fully licensed version from VLSC or MSDN, or a 180 days trial version from the Microsoft Evaluation Center: <https://www.microsoft.com/en-us/evalcenter/>
 - SQL Server 2019 Cumulative Update (CU) 14 (or later): [https://www.microsoft.com/en-us/download/details.aspx?id=100809](https://www.microsoft.com/en-us/download/details.aspx?id=100809) (ConfigMgr only requires CU 5 for SQL Server 2019, but I recommend using the latest CU).
 - SQL Server 2019 Reporting Services: <https://www.microsoft.com/en-us/download/details.aspx?id=100122>
@@ -296,6 +307,22 @@ Next step is to start copying the various installation files to the correct fold
 
 *MDT 8456 copied.*
 
+12\. Copy your **Windows 10 reference image** (must be named **REFW10X64-001.wim**, case sensitive), to the following folder: **C:\CMLab\DS\Operating Systems\Windows 10**
+
+**Note #1:** The WIM image should only have a single index with the **Windows 10 Enterprise** edition. Please use the script to extract the correct index from a Windows 10 ISO file.
+
+![The Windows 10 Standard image copied.](docs/W10-WIM-Copied.png)
+
+*The Windows 10 Enterprise image copied.*
+
+13\. Copy your **Windows 11 reference image** (must be named **REFW11X64-001.wim**, case sensitive), to the following folder: **C:\CMLab\DS\Operating Systems\Windows 11**
+
+**Note #1:** The WIM image should only have a single index with the **Windows 11 Enterprise** edition. Please use the script to extract the correct index from a Windows 11 ISO file.
+
+![The Windows 10 Standard image copied.](docs/W11-WIM-Copied.png)
+
+*The Windows 11 Enterprise image copied.*
+
 ### Optional - Populate the hydration deployment share with files for MDT01
 
 >**Note:** These steps are only needed if you want to deploy the optional MDT01 virtual machine. If you don't need this VM, simply skip to the next section: "Create the Hydration Kit ISO (MDT offline media item)"
@@ -408,6 +435,16 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 - Name: **FS01**
 - CPU: **2 vCPU**
 - Hard drive: **300 GB** (dynamic disk)
+- Memory: **4 GB** (static memory)
+- Network: **Your lab network**
+- Image file (ISO): **C:\CMLab\ISO\HydrationCMWS2022.iso**
+
+#### **Deploying PC0001-4 (Optional)**
+Once the domain controller (DC01) is up and running, you can deploy the optional PC0001-4 virtual machine(s). Don't forget to leave DC01 running while deploying PC0001-4 since they are joining the domain during deployment. Use the following settings for the PC0001-4 virtual machine(s):
+
+- Name: **PC0001** / **PC0002** / **PC0003** / **PC0004**
+- CPU: **2 vCPU**
+- Hard drive: **60 GB** (dynamic disk)
 - Memory: **4 GB** (static memory)
 - Network: **Your lab network**
 - Image file (ISO): **C:\CMLab\ISO\HydrationCMWS2022.iso**
