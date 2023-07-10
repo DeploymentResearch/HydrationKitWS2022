@@ -26,7 +26,7 @@ Install-AdcsCertificationAuthority `
     -CAType EnterpriseRootCA `
     -CACommonName "ViaMonstraRootCA" `
     -KeyLength 2048 `
-    -HashAlgorithm SHA1 `
+    -HashAlgorithm SHA256 `
     -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" `
     -ValidityPeriod Years `
     -ValidityPeriodUnits 5 `
