@@ -4,30 +4,31 @@ This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure runn
 
 - [Hydration Kit For Windows Server 2022, SQL Server 2019 and ConfigMgr Current Branch](#hydration-kit-for-windows-server-2022-sql-server-2019-and-configmgr-current-branch)
   - [Notes](#notes)
-  - [Hydration Kit For Windows Server 2022 and ConfigMgr Current Branch](#hydration-kit-for-windows-server-2019-and-configmgr-current-branch)
+  - [Hydration Kit For Windows Server 2022 and ConfigMgr Current Branch](#hydration-kit-for-windows-server-2022-and-configmgr-current-branch)
     - [Servers](#servers)
       - [Main servers](#main-servers)
       - [Optional supporting servers](#optional-supporting-servers)
     - [Clients](#clients)
   - [Setup Overview](#setup-overview)
   - [Step-by-Step Guides](#step-by-step-guides)
-    - [Step 1: Download the software](#step-1-download-the-software)
+    - [Step 1: Download the software](#step-1---download-the-software)
       - [Optional Servers](#optional-servers)
-    - [Step 2: Install the Hydration Kit](#step-2-install-the-hydration-kit)
+      - [Optional Clients](#optional-clients)
+    - [Step 2: Install the Hydration Kit](#step-2---install-the-hydration-kit)
       - [Installing Hydration Kit Prerequisites](#installing-hydration-kit-prerequisites)
         - [Installing the Hydration Kit](#installing-the-hydration-kit)
-    - [Step 3: Copy the downloaded software to the Hydration Kit](#step-3-copy-the-downloaded-software-to-the-hydration-kit)
-      - [Optional: Populate the hydration deployment share with files for MDT01](#optional-populate-the-hydration-deployment-share-with-files-for-mdt01)
-    - [Step 4: Create the bootable Hydration Kit ISO (MDT offline media item)](#step-4-create-the-bootable-hydration-kit-iso-mdt-offline-media-item)
-    - [Step 5: Create and Deploy the virtual machines](#step-5-create-and-deploy-the-virtual-machines)
-  - [Optional Post-ConfigMgr Install Tasks](#next-steps-optional-post-configmgr-install-tasks)
-  - [Customizing the Hydration Kit](#next-steps-customizing-the-hydration-kit)
+    - [Step 3: Copy the downloaded software to the Hydration Kit](#step-3---copy-the-downloaded-software-to-the-hydration-kit)
+      - [Optional: Populate the hydration deployment share with files for MDT01](#optional---populate-the-hydration-deployment-share-with-files-for-mdt01)
+    - [Step 4: Create the bootable Hydration Kit ISO (MDT offline media item)](#step-4---create-the-bootable-hydration-kit-iso-mdt-offline-media-item)
+    - [Step 5: Create and Deploy the virtual machines](#step-5---create-and-deploy-the-virtual-machines)
+  - [Optional Post-ConfigMgr Install Tasks](#next-steps---optional-post-configmgr-install-tasks)
+  - [Customizing the Hydration Kit](#next-steps---customizing-the-hydration-kit)
 
 Download from GitHub: <https://github.com/DeploymentResearch/HydrationKitWS2022>
 
-**Hydration Kit Video:** Check out the free mini course at the ViaMonstra Online Academy covering the Hydration Kit setup (and many other tips and tricks related for creating a lab for ConfigMgr, MDT and Intune): [Building the Perfect Lab for ConfigMgr, MDT, and Intune](https://academy.viamonstra.com/courses/mini-course-building-the-perfect-lab-for-configmgr-mdt-and-Intune-q4-2021-edition).
+**Hydration Kit Video:** Check out the free mini course at the ViaMonstra Online Academy covering the Hydration Kit setup (and many other tips and tricks related for creating a lab for ConfigMgr, MDT and Intune): [Building the Perfect Lab for ConfigMgr, MDT, and Intune](https://academy.viamonstra.com/courses/mini-course-building-the-perfect-lab-for-configmgr-mdt-and-intune).
 
-![Sample screenshot from the free mini course on ViaMonstra Online Academy.](docs/SnapshotFromTraining-w700.jpg)]
+![Sample screenshot from the free mini course on ViaMonstra Online Academy.](docs/SnapshotFromTraining-w700.jpg)
 
 *Sample screenshot from the free mini course on ViaMonstra Online Academy.*
 
@@ -74,7 +75,8 @@ This kit allows you to automatically deploy the below list of servers. The serve
 - **DP01**. Windows Server 2022, additional ConfigMgr DP
 
 ### Clients
-This kit also allows you to automatically deploy the below list of clients for management. 
+
+This kit also allows you to automatically deploy the below list of clients for management.
 
 - **PC001**. Windows 10 Enterprise
 - **PC002**. Windows 10 Enterprise
@@ -114,8 +116,6 @@ Then, for the main servers (DC01 and CM01), you need to download the following s
 - MDT 8456 Hotfix: <https://download.microsoft.com/download/3/0/6/306AC1B2-59BE-43B8-8C65-E141EF287A5E/KB4564442/MDT_KB4564442.exe>
 - BGInfo: [http://technet.microsoft.com/en-us/sysinternals/bginfo](https://technet.microsoft.com/en-us/sysinternals/bginfo)
 - A Windows Server 2022 Standard WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows Server 2022 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-WindowsServer2022WIMfromISO.ps1>
-- A Windows 10 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 10 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows10EnterpriseWIMFromISO.ps1>
-- A Windows 11 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 11 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows11EnterpriseWIMFromISO.ps1>
 - SQL Server 2019 Standard x64: Either a fully licensed version from VLSC or MSDN, or a 180 days trial version from the Microsoft Evaluation Center: <https://www.microsoft.com/en-us/evalcenter/>
 - SQL Server 2019 Cumulative Update (CU) 14 (or later): [https://www.microsoft.com/en-us/download/details.aspx?id=100809](https://www.microsoft.com/en-us/download/details.aspx?id=100809) (ConfigMgr only requires CU 5 for SQL Server 2019, but I recommend using the latest CU).
 - SQL Server 2019 Reporting Services: <https://www.microsoft.com/en-us/download/details.aspx?id=100122>
@@ -140,7 +140,7 @@ Windows ADK for Windows 11and the ADK WinPE Addon for Windows 11: <https://docs.
 
 *The Windows ADK 11 WinPE Addon files.*
 
-#### Optional Servers
+### Optional Servers
 
 The FS01 and DP01 optional servers don't need any extra software, but for the MDT01 server, you also need to download the following software:
 
@@ -155,6 +155,13 @@ The FS01 and DP01 optional servers don't need any extra software, but for the MD
 ![Selecting the Express Core version.](docs/Downloading-SQL-Server-2019-Express-from-web-installer-002-Download-Page.png)
 
 *Selecting the Express Core version.*
+
+### Optional Clients
+
+For the optional clients, you also need to download the following software:
+
+- A Windows 10 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 10 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows10EnterpriseWIMFromISO.ps1>
+- A Windows 11 Enterprise WIM image (single index, fully updated). The easiest way to get one is to download an already updated Windows 11 ISO file, and then run this PowerShell script: <https://github.com/DeploymentResearch/DRFiles/blob/master/Scripts/Export-Windows11EnterpriseWIMFromISO.ps1>
 
 ## Step 2 - Install the Hydration Kit
 
@@ -440,6 +447,7 @@ Once the domain controller (DC01) is up and running, you can deploy the optional
 - Image file (ISO): **C:\CMLab\ISO\HydrationCMWS2022.iso**
 
 #### **Deploying PC0001-4 (Optional)**
+
 Once the domain controller (DC01) is up and running, you can deploy the optional PC0001-4 virtual machine(s). Don't forget to leave DC01 running while deploying PC0001-4 since they are joining the domain during deployment. Use the following settings for the PC0001-4 virtual machine(s):
 
 - Name: **PC0001** / **PC0002** / **PC0003** / **PC0004**
