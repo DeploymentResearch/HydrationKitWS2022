@@ -260,7 +260,7 @@ Next step is to start copying the various installation files to the correct fold
 *The Windows ADK 11 setup files copied.*
 
 4\. Copy the **Windows ADK 11 WinPE Addon** setup files (3 GB) to the following folder:\
-**C:\CMLab\DS\Applications\Install - WinPE Addon for Windows ADK 11\Source**
+**C:\CMLab\DS\Applications\Install - Windows ADK 11 WinPE Addon\Source**
 
 ![Windows ADK 11 WinPE Addon setup files copied.](docs/ADK11WinPECopied.png)
 
