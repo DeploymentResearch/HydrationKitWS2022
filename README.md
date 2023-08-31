@@ -267,13 +267,13 @@ Next step is to start copying the various installation files to the correct fold
 *Windows ADK 11 WinPE Addon setup files copied.*
 
 5\. Copy the **SQL Server 2019 Standard x64** setup files (the content of the ISO, not the actual ISO) to the following folder:\
-**C:\CMLab\DS\Applications\Install - SQL Server 2019\Source**
+**C:\CMLab\DS\Applications\Install - SQL Server 2019 Standard\Source**
 
 ![SQL Server 2019 Standard x64 setup files copied.](docs/SQL-Server-2019-Standard-Copied.png)
 
 *SQL Server 2019 Standard x64 setup files copied.*
 
-6\. In the **C:\CMLab\DS\Applications\Install - SQL Server 2019\Source** folder, create a subfolder named **Updates**, and copy thelatest **SQL Server 2019 CU** setup file to it (CU 14 when I wrote this guide).
+6\. In the **C:\CMLab\DS\Applications\Install - SQL Server 2019 Standard\Source** folder, create a subfolder named **Updates**, and copy thelatest **SQL Server 2019 CU** setup file to it (CU 14 when I wrote this guide).
 
 ![The SQL Server 2019 CU copied to Updates folder.](docs/SQL-Server-2019-CU-14-Copied.png)
 
