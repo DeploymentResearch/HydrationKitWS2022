@@ -508,7 +508,7 @@ If you need to change the various service accounts, you need to to modify the **
 
 ### Customizing with a script
 
-With a huge thanks to [Matt Bennigne](https://www.deploymentresearch.com/author/matbg/), a customization script called [CustomizeHydrationKit.ps1](https://github.com/DeploymentResearch/HydrationKitWS2022/blob/main/CustomizeHydrationKit.ps1) has been updated and added to the Server 2022 kit for the first time! This script assists in changing many of the customizable parameters of the Hydration Kit, including IP addresses, domain name, time zone, and passwords.
+With a huge thanks to [Matt Benninge](https://www.deploymentresearch.com/author/matbg/), a customization script called [CustomizeHydrationKit.ps1](https://github.com/DeploymentResearch/HydrationKitWS2022/blob/main/CustomizeHydrationKit.ps1) has been updated and added to the Server 2022 kit for the first time! This script assists in changing many of the customizable parameters of the Hydration Kit, including IP addresses, domain name, time zone, and passwords.
 
 In addition, the script will make a copy of the original configuration so that you can easily revert your changes. Upon rerunning the script on a customized Deployment Share, the script will revert all files to the original copies before applying your changes again.
 
