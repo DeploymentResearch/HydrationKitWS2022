@@ -130,7 +130,11 @@ Then, for the main servers (DC01 and CM01), you need to download the following s
 
 Windows ADK for Windows 11and the ADK WinPE Addon for Windows 11: <https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install>
 
->**Note:** To download the complete standalone Windows ADK for Windows 11 setup, run **adksetup.exe /layout "C:\Setup\Windows ADK 11**" for the core ADK, and then **adkwinpesetup.exe /layout "C:\Setup\Windows ADK 11 WinPE Addon"** for the WinPE Addon.
+**Note #1:** Make sure to get the 22H2 version of the Windows ADK for Windows 11 (10.1.22621.1), not the new 23H2 version (10.1.25398.1, released in September 2023). Because the Windows ADK for Windows 11 does not include the 32-bit (x86) version of Windows PE, you'll need to create an empty x86\WinPE_OCs folder structure in the Windows ADK folder. MDT doesn't use, but still looks for, this directory.
+
+More information can be found in this blog post: [https://www.deploymentresearch.com/windows-11-deployment-using-mdt-8456-with-windows-adk-23h2-build-25398/](https://www.deploymentresearch.com/windows-11-deployment-using-mdt-8456-with-windows-adk-23h2-build-25398/)
+
+**Note #2:** To download the complete standalone Windows ADK for Windows 11 setup, run **adksetup.exe /layout "C:\Setup\Windows ADK 11**" for the core ADK, and then **adkwinpesetup.exe /layout "C:\Setup\Windows ADK 11 WinPE Addon"** for the WinPE Addon.
 
 ![Windows ADK 11 setup files.](docs/ADk11-1.png)
 
