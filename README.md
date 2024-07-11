@@ -1,6 +1,6 @@
 # Hydration Kit For Windows Server 2022, SQL Server 2019 and ConfigMgr Current Branch
 
-This kit builds a complete **ConfigMgr Current Branch 2111** infrastructure running on **Windows Server 2022** and **SQL Server 2019**, including optional **Windows 10** and **Windows 11** clients. This kit is tested on both Hyper-V and VMware virtual platforms, but should work fine on other virtualization platforms like Virtual Box, KVM etc.
+This kit builds a complete **ConfigMgr Current Branch 2403** infrastructure running on **Windows Server 2022** and **SQL Server 2019**, including optional **Windows 10** and **Windows 11** clients. This kit is tested on both Hyper-V and VMware virtual platforms, but should work fine on other virtualization platforms like Virtual Box, KVM etc.
 
 - [Hydration Kit For Windows Server 2022, SQL Server 2019 and ConfigMgr Current Branch](#hydration-kit-for-windows-server-2022-sql-server-2019-and-configmgr-current-branch)
   - [Notes](#notes)
@@ -57,7 +57,7 @@ Download from GitHub: <https://github.com/DeploymentResearch/HydrationKitWS2022>
 
 ## Hydration Kit for Windows Server 2022 and ConfigMgr Current Branch
 
-So, again, this Kit builds a complete ConfigMgr Current Branch 2111, with Windows Server 2019 and SQL Server 2019 infrastructure, and some supporting servers. Once the build is complete, I recommend that you use the native ConfigMgr servicing option to update to latest release or Hotfix if available.
+So, again, this Kit builds a complete ConfigMgr Current Branch 2403, with Windows Server 2019 and SQL Server 2019 infrastructure, and some supporting servers. Once the build is complete, I recommend that you use the native ConfigMgr servicing option to update to latest release or Hotfix if available.
 
 ### Servers
 
