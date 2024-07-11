@@ -150,3 +150,4 @@ New-Item -Path "$Path\DS\Applications\Install - ConfigMgr\PreReqs" -ItemType Dir
 New-Item -Path "$Path\DS\Applications\Install - MDT" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Express\Source" -ItemType Directory -Force
 New-Item -Path "$Path\DS\Applications\Install - SQL Server 2019 Reporting Services\Source" -ItemType Directory -Force
+New-Item -Path "$Path\DS\Applications\Install - Microsoft ODBC Driver 18" -ItemType Directory -Force
