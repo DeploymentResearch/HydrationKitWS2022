@@ -120,6 +120,7 @@ Then, for the main servers (DC01 and CM01), you need to download the following s
 - SQL Server 2019 Cumulative Update (CU) 14 (or later): [https://www.microsoft.com/en-us/download/details.aspx?id=100809](https://www.microsoft.com/en-us/download/details.aspx?id=100809) (ConfigMgr only requires CU 5 for SQL Server 2019, but I recommend using the latest CU).
 - SQL Server 2019 Reporting Services: <https://www.microsoft.com/en-us/download/details.aspx?id=100122>
 - SQL Server Management Studio: <https://aka.ms/ssmsfullsetup>
+- Microsoft ODBC Driver 18 for SQL Server (x64): <https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server>
 - ConfigMgr 2403 and its prerequisites: Either a fully licensed version from VLSC or MSDN, or a 180 days trial version from the Microsoft Evaluation Center: <https://www.microsoft.com/en-us/evalcenter/evaluate-microsoft-endpoint-configuration-manager>
 
 >**Note:** To download the ConfigMgr prerequisites, you run the **SMSSETUP\BIN\X64\setupdl.exe** application from the ConfigMgr installation files and simply provide a folder for the download.
@@ -301,26 +302,26 @@ Next step is to start copying the various installation files to the correct fold
 
 *SQL Server Reporting Services setup files copied.*
 
-9\. Copy the **ConfigMgr 2103** setup files (extract the download) to the following folder:\
+9\. Copy the **Microsoft ODBC Driver 18 for SQL Server (x64)** setup file to the following folder:\
+**D:\CMLab\DS\Applications\Install - Microsoft ODBC Driver 18**
+
+![Microsoft ODBC Driver 18 for SQL Server (x64)setup files copied.](docs/ODBC-Driver-Copied.png)
+
+*Microsoft ODBC Driver 18 for SQL Server (x64)setup files copied.*
+
+10\. Copy the **ConfigMgr 2403** setup files (extract the download) to the following folder:\
 **C:\CMLab\DS\Applications\Install - ConfigMgr\Source**
 
 ![ConfigMgr setup files copied.](docs/CMCopied.png)
 
 *ConfigMgr setup files copied.*
 
-10\. Copy the **ConfigMgr 2013 PreReqs** setup files to the following folder:\
+11\. Copy the **ConfigMgr 2013 PreReqs** setup files to the following folder:\
 **C:\CMLab\DS\Applications\Install - ConfigMgr\PreReqs**
 
 ![ConfigMgr Pre-requisite files copied, showing a subset of the files.](docs/CMPreReqsCopied.png)
 
 *ConfigMgr Pre-requisite files copied, showing a subset of the files.*
-
-11\. Copy the **MDT 8456** setup file (MicrosoftDeploymentToolkit_x64.msi) to the following folder:\
-**C:\CMLab\DS\Applications\Install - MDT**
-
-![MDT 8456 copied.](docs/MDTCopied.png)
-
-*MDT 8456 copied.*
 
 12\. Copy your **Windows 10 reference image** (must be named **REFW10X64-001.wim**, case sensitive), to the following folder: **C:\CMLab\DS\Operating Systems\Windows 10**
 
@@ -348,6 +349,13 @@ Next step is to start copying the various installation files to the correct fold
 ![SQL Server 2019 Express setup file copied.](docs/SQL-Server-2019-Express-Copied.png)
 
 *SQL Server 2019 Express setup file copied.*
+
+2.\. Copy the **MDT 8456** setup file (MicrosoftDeploymentToolkit_x64.msi) to the following folder:\
+**C:\CMLab\DS\Applications\Install - MDT**
+
+![MDT 8456 copied.](docs/MDTCopied.png)
+
+*MDT 8456 copied.*
 
 ## Step 4 - Create the bootable Hydration Kit ISO (MDT offline media item)
 

@@ -10,7 +10,7 @@
     <variable name="DestinationOSInstallType" property="DestinationOSInstallType">ByVariable</variable>
     <variable name="OSGUID" property="OSGUID">{e48b03db-5d22-467c-afdb-f4f13baead29}</variable>
   </globalVarList>
-  <group name="Initialization" disable="false" continueOnError="false" description="Initialize the TS environment" expand="true">
+  <group name="Initialization" disable="false" continueOnError="false" description="Initialize the TS environment" expand="false">
     <step type="BDD_Gather" name="Gather local only" disable="false" continueOnError="false" successCodeList="0 3010" description="" startIn="">
       <defaultVarList>
         <variable name="GatherLocalOnly" property="GatherLocalOnly">true</variable>
@@ -33,7 +33,7 @@
       <action>cscript.exe "%SCRIPTROOT%\ZTISetVariable.wsf"</action>
     </step>
   </group>
-  <group name="Validation" disable="false" continueOnError="false" description="Test" expand="true">
+  <group name="Validation" disable="false" continueOnError="false" description="Test" expand="false">
     <condition>
       <operator type="or">
         <expression type="SMS_TaskSequence_VariableConditionExpression">
@@ -152,7 +152,7 @@
       </step>
     </group>
   </group>
-  <group name="Preinstall" disable="false" continueOnError="false" description="" expand="true">
+  <group name="Preinstall" disable="false" continueOnError="false" description="" expand="false">
     <condition>
       <expression type="SMS_TaskSequence_VariableConditionExpression">
         <variable name="Variable">PHASE</variable>
@@ -167,7 +167,7 @@
       </defaultVarList>
       <action>cscript.exe "%SCRIPTROOT%\ZTIGather.wsf"</action>
     </step>
-    <group name="New Computer only" disable="false" continueOnError="false" description="" expand="true">
+    <group name="New Computer only" disable="false" continueOnError="false" description="" expand="false">
       <condition>
         <expression type="SMS_TaskSequence_VariableConditionExpression">
           <variable name="Variable">DeploymentType</variable>
@@ -343,7 +343,7 @@
       </defaultVarList>
     </step>
   </group>
-  <group name="Install" disable="false" continueOnError="false" description="" expand="true">
+  <group name="Install" disable="false" continueOnError="false" description="" expand="false">
     <condition>
       <expression type="SMS_TaskSequence_VariableConditionExpression">
         <variable name="Variable">PHASE</variable>
@@ -435,7 +435,7 @@
       <action>smsboot.exe /target:WinPE</action>
     </step>
   </group>
-  <group name="State Restore" disable="false" continueOnError="false" description="" expand="true">
+  <group name="State Restore" disable="false" continueOnError="false" description="" expand="false">
     <condition>
       <expression type="SMS_TaskSequence_VariableConditionExpression">
         <variable name="Variable">PHASE</variable>
@@ -856,6 +856,13 @@
       </defaultVarList>
       <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
     </step>
+    <step type="BDD_InstallApplication" name="Install - Microsoft ODBC Driver 18" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID">{f1e4bdb1-9ade-4c60-8022-a2a61e7afec3}</variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
   </group>
   <group expand="true" name="Install ConfigMgr" description="" disable="false" continueOnError="false">
     <action />
@@ -875,23 +882,6 @@
       <action>smsboot.exe /target:WinPE</action>
     </step>
     <condition />
-  </group>
-  <group expand="true" name="Install MDT" description="" disable="false" continueOnError="false">
-    <action />
-    <step type="BDD_InstallApplication" name="Install - MDT 8456" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
-      <defaultVarList>
-        <variable name="ApplicationGUID" property="ApplicationGUID">{a05586e5-28a0-4910-9c14-223319bde692}</variable>
-        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
-      </defaultVarList>
-      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
-    </step>
-    <step type="BDD_InstallApplication" name="Configure - MDT Integration with ConfigMgr" description="" disable="false" continueOnError="false" runIn="WinPEandFullOS" successCodeList="0 3010">
-      <defaultVarList>
-        <variable name="ApplicationGUID" property="ApplicationGUID">{d8037969-01c4-4737-b5c4-01106199f1a8}</variable>
-        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 3010</variable>
-      </defaultVarList>
-      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
-    </step>
   </group>
   <group expand="true" name="Install ConfigMgr Roles" description="" disable="false" continueOnError="false">
     <action />
