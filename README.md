@@ -316,7 +316,7 @@ Next step is to start copying the various installation files to the correct fold
 
 *ConfigMgr setup files copied.*
 
-11\. Copy the **ConfigMgr 2013 PreReqs** setup files to the following folder:\
+11\. Copy the **ConfigMgr 2403 PreReqs** setup files to the following folder:\
 **C:\CMLab\DS\Applications\Install - ConfigMgr\PreReqs**
 
 ![ConfigMgr Pre-requisite files copied, showing a subset of the files.](docs/CMPreReqsCopied.png)
