@@ -303,7 +303,7 @@ Next step is to start copying the various installation files to the correct fold
 *SQL Server Reporting Services setup files copied.*
 
 9\. Copy the **Microsoft ODBC Driver 18 for SQL Server (x64)** setup file to the following folder:\
-**D:\CMLab\DS\Applications\Install - Microsoft ODBC Driver 18**
+**C:\CMLab\DS\Applications\Install - Microsoft ODBC Driver 18**
 
 ![Microsoft ODBC Driver 18 for SQL Server (x64)setup files copied.](docs/ODBC-Driver-Copied.png)
 
